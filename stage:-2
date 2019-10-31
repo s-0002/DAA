@@ -1,324 +1,85 @@
-#tsp using cheapest link algoritum
 #include <iostream>
-#include <cstdlib>
+#include <vector>
+#include <algorithm>
 using namespace std;
-#define V 1000
-#define vector
-#define INT_MAX
-int TSP(int graph[][V], int s)
-{
-   // store minimum weight Hamiltonian Cycle.
-   int min_path = INT_MAX
-    do {
-        int current_pathweight = 0;
-        int k = s;
-        for (int i = 0; i < vertex.size(); i++) {
-            current_pathweight += graph[k][vertex[i]];
-            k = vertex[i];
-        }
-        current_pathweight += graph[k][s];
-        min_path = min(min_path, current_pathweight);
-         
-    } while (next_permutation(vertex.begin(), vertex.end()));
- 
-    return min_path;
+
+#define edge pair<int,int>
+
+class Graph {
+private:
+vector<pair<int, edge>> G;
+vector<pair<int, edge>> T;
+int *parent;
+int V;
+public:
+Graph(int V);
+void AddEdge(int u, int v, int w);
+int find_set(int i);
+void union_set(int u, int v);
+void TSP();
+void print();
+};
+Graph::Graph(int V) {
+parent = new int[V];
+for (int i = 0; i < V; i++)
+parent[i] = i;
+
+G.clear();
+T.clear();
+}
+void Graph::AddEdge(int u, int v, int w) {
+G.push_back(make_pair(w, edge(u, v)));
+}
+int Graph::find_set(int i) {
+
+if (i == parent[i])
+return i;
+else
+
+return find_set(parent[i]);
 }
 
-void graph(){
-int v, e, i, j, a, b, cost;
-
-cout << "Enter number of vertices: ";
-cin >>v;
-
-cout << "Enter number of edges: ";
-cin >> e;
-
-int matrix[v][v];
-
-for(i=0; i<v; i++){
-for(j=0; j<v; j++){
-matrix[i][j] = 0;
+void Graph::union_set(int u, int v) {
+parent[u] = parent[v];
+}
+void Graph::TSP() {
+int i, uRep, vRep;
+sort(G.begin(), G.end());
+for (i = 0; i < G.size(); i++) {
+uRep = find_set(G[i].second.first);
+vRep = find_set(G[i].second.second);
+if (uRep != vRep) {
+T.push_back(G[i]); // add to tree
+union_set(uRep, vRep);
 }
 }
-
-cout << "Enter the edges in pairs:- "<< "\n";
-
-for(i=0; i<e; i++){
-cin >> a;
-cin >> b;
-cout << "Enter Cost: ";
-cin >> cost;
-
-matrix[a][b] = cost;
 }
-
-
-// For Printing
-for(i=0; i<v; i++){
-for(j=0; j<v; j++){
-cout << matrix[i][j] << " ";
-}
+void Graph::print() {
+cout << "Edge :" << " Weight" << endl;
+int p=0;
+for (int i = 0; i < T.size(); i++) {
+p = p + T[i].first;
+cout << T[i].second.first << " - " << T[i].second.second << " : "
+<< T[i].first;
 cout << endl;
 }
-
-
-
-
-
-
-int main(){
-
-graph();
-
-
-
-return 0;
-   
+cout << p;
 }
+int main() {
+int n , u , v , w, e;
 
-
-}
-
-
-#include <iostream>
-#include <cstdlib>
-using namespace std;
-#define V 1000
-#define vector
-#define INT_MAX
-int TSP(int graph[][V], int s)
+cin >> e; //number of edges
+cout << e;
+cin >> n; //number of vertices
+cout << n;
+Graph g(n);
+for (int i=1;i<=e;i++)
 {
-   // store minimum weight Hamiltonian Cycle.
-   int min_path = INT_MAX
-    do {
-        int current_pathweight = 0;
-        int k = s;
-        for (int i = 0; i < vertex.size(); i++) {
-            current_pathweight += graph[k][vertex[i]];
-            k = vertex[i];
-        }
-        current_pathweight += graph[k][s];
-        min_path = min(min_path, current_pathweight);
-         
-    } while (next_permutation(vertex.begin(), vertex.end()));
- 
-    return min_path;
+cin >> u >> v >>w;
+g.AddEdge(u,v,w);
 }
-
-void graph(){
-int v, e, i, j, a, b, cost;
-
-cout << "Enter number of vertices: ";
-cin >>v;
-
-cout << "Enter number of edges: ";
-cin >> e;
-
-int matrix[v][v];
-
-for(i=0; i<v; i++){
-for(j=0; j<v; j++){
-matrix[i][j] = 0;
-}
-}
-
-cout << "Enter the edges in pairs:- "<< "\n";
-
-for(i=0; i<e; i++){
-cin >> a;
-cin >> b;
-cout << "Enter Cost: ";
-cin >> cost;
-
-matrix[a][b] = cost;
-}
-
-
-// For Printing
-for(i=0; i<v; i++){
-for(j=0; j<v; j++){
-cout << matrix[i][j] << " ";
-}
-cout << endl;
-}
-
-
-
-
-
-
-int main(){
-
-graph();
-
-
-
+g.TSP();
+g.print();
 return 0;
-   
-}
-
-
-}
-
-
-#include <iostream>
-#include <cstdlib>
-using namespace std;
-#define V 1000
-#define vector
-#define INT_MAX
-int TSP(int graph[][V], int s)
-{
-   // store minimum weight Hamiltonian Cycle.
-   int min_path = INT_MAX
-    do {
-        int current_pathweight = 0;
-        int k = s;
-        for (int i = 0; i < vertex.size(); i++) {
-            current_pathweight += graph[k][vertex[i]];
-            k = vertex[i];
-        }
-        current_pathweight += graph[k][s];
-        min_path = min(min_path, current_pathweight);
-         
-    } while (next_permutation(vertex.begin(), vertex.end()));
- 
-    return min_path;
-}
-
-void graph(){
-int v, e, i, j, a, b, cost;
-
-cout << "Enter number of vertices: ";
-cin >>v;
-
-cout << "Enter number of edges: ";
-cin >> e;
-
-int matrix[v][v];
-
-for(i=0; i<v; i++){
-for(j=0; j<v; j++){
-matrix[i][j] = 0;
-}
-}
-
-cout << "Enter the edges in pairs:- "<< "\n";
-
-for(i=0; i<e; i++){
-cin >> a;
-cin >> b;
-cout << "Enter Cost: ";
-cin >> cost;
-
-matrix[a][b] = cost;
-}
-
-
-// For Printing
-for(i=0; i<v; i++){
-for(j=0; j<v; j++){
-cout << matrix[i][j] << " ";
-}
-cout << endl;
-}
-
-
-
-
-
-
-int main(){
-
-graph();
-
-
-
-return 0;
-   
-}
-
-
-}
-
-
-#include <iostream>
-#include <cstdlib>
-using namespace std;
-#define V 1000
-#define vector
-#define INT_MAX
-int TSP(int graph[][V], int s)
-{
-   // store minimum weight Hamiltonian Cycle.
-   int min_path = INT_MAX
-    do {
-        int current_pathweight = 0;
-        int k = s;
-        for (int i = 0; i < vertex.size(); i++) {
-            current_pathweight += graph[k][vertex[i]];
-            k = vertex[i];
-        }
-        current_pathweight += graph[k][s];
-        min_path = min(min_path, current_pathweight);
-         
-    } while (next_permutation(vertex.begin(), vertex.end()));
- 
-    return min_path;
-}
-
-void graph(){
-int v, e, i, j, a, b, cost;
-
-cout << "Enter number of vertices: ";
-cin >>v;
-
-cout << "Enter number of edges: ";
-cin >> e;
-
-int matrix[v][v];
-
-for(i=0; i<v; i++){
-for(j=0; j<v; j++){
-matrix[i][j] = 0;
-}
-}
-
-cout << "Enter the edges in pairs:- "<< "\n";
-
-for(i=0; i<e; i++){
-cin >> a;
-cin >> b;
-cout << "Enter Cost: ";
-cin >> cost;
-
-matrix[a][b] = cost;
-}
-
-
-// For Printing
-for(i=0; i<v; i++){
-for(j=0; j<v; j++){
-cout << matrix[i][j] << " ";
-}
-cout << endl;
-}
-
-
-
-
-
-
-int main(){
-
-graph();
-
-
-
-return 0;
-   
-}
-
-
 }
 
