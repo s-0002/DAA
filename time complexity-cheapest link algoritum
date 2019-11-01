@@ -1,0 +1,12 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Times New Roman;}{\f1\fnil\fcharset0 Calibri;}{\f2\fnil\fcharset2 Symbol;}}
+{\*\generator Riched20 10.0.17763}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs40\lang9 TIME COMPLEXITY:\par
+
+\pard{\pntext\f2\'B7\tab}{\*\pn\pnlvlblt\pnf2\pnindent0{\pntxtb\'B7}}\fi-360\li720\sa200\sl276\slmult1  For forming cycle O(logN)\par
+{\pntext\f2\'B7\tab}for travelling through edges O(E)\par
+{\pntext\f2\'B7\tab}Hence, The time complexity is O(E).\par
+
+\pard\sa200\sl276\slmult1          \par
+         \par
+                \f1\par
+}
