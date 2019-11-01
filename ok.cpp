@@ -1,0 +1,84 @@
+#include <iostream>
+using namespace std;
+#define V 100
+void print(int n,int a[][V])
+{
+    int i,j;
+    cout<<"The matrix is:-"<<endl<<"  ";
+    for(i=0;i<n;i++)
+    {
+        cout<<(char)(65+i)<<"  ";
+    }
+    cout<<endl;
+    for(i=0;i<n;i++)
+    {
+        cout<<(char)(65+i)<<" ";
+        for(j=0;j<n;j++)
+        {
+            if(a[i][j]==99999)
+            cout<<"INFORMATION"<<" ";
+            else
+            cout<<a[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+}
+void calculation(int k,int n,int a[][V])
+{
+    int i,j,c,p[n],k2=k,k1=0,s=0,k3=k;
+    bool m[n];
+    for(i=0;i<n;i++)
+    m[i]=true;
+    m[k2]=false;
+    cout<<"the path is: "<<(char)(65+k)<<" --> ";
+    for(i=0;i<n;i++)
+    {
+        c=99999;
+        for(j=0;j<n;j++)
+        {
+            if(m[j] && a[k2][j]<c)
+            {
+                c=a[k2][j];
+                k=j;
+            }
+        }
+        k2=k;
+        if(c!=99999)
+        {s+=c;
+        m[k2]=false;
+        p[k1]=c;
+        k1++;
+        cout<<(char)(65+k2)<<" --> ";}
+    }
+    cout<<(char)(65+k3)<<endl;
+    s+=a[k2][k3];
+    cout<<"the cost is: "<<s;
+       
+}
+int main()
+{
+    int m,i,j,k;
+    char var;
+    cout<<"Enter the total number of vertices: ";
+    cin>>m;
+    int a[m][V];
+    for(i=0;i<m;i++)
+    {
+        for(j=0;j<m;j++)
+        {
+            if(i==j)
+            a[i][j]=99999;
+            else
+            {
+                cout<<"Enter the cost of travelling from node "<<(char)(65+i)<<" to node "<<(char)(65+j)<<": ";
+                cin>>a[i][j];
+            }
+        }
+    }
+    print(m,a);
+    cout<<"Enter the starting vertex in alphabet such as A,B,C,D... ";
+    cin>>var;
+    calculate(int(var)-65,m,a);
+    return 0;
+   
+}
