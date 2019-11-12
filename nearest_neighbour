@@ -78,7 +78,7 @@ int main()
     print(m,a);
     cout<<"Enter the starting vertex in alphabet such as A,B,C,D... ";
     cin>>var;
-    calculate(int(var)-65,m,a);
+    calculation(int(var)-65,m,a);
     return 0;
    
 }
